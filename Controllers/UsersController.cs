@@ -29,7 +29,7 @@ namespace CEWeb.Controllers
 
 
 
-        [HttpGet("{id:int}")]
+        [HttpGet("{id:int}",Name ="Get")]
         public async Task<IActionResult> GetUser(int id)
         {
             var user = await _databaseContext.Users.FindAsync(id);
@@ -46,11 +46,11 @@ namespace CEWeb.Controllers
             _databaseContext.Users.Add(user);
             await _databaseContext.SaveChangesAsync();
 
-            return CreatedAtRoute(
-                "GetUSER",
-                new { id = user.userId },
-                user
-                );                                                       
+            //return CreatedAtAction(nameof(GetUser), new { id = user.userId }, user);
+
+            return CreatedAtRoute("Get",new { id = user.userId },user ); 
+
+            //return Ok("Added");
         }
 
         [HttpPut("{id:int}")]

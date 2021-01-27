@@ -6,7 +6,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
-using Microsoft.OpenApi.Models;
+//using Microsoft.OpenApi.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -30,8 +30,10 @@ namespace CEWeb
         {
 
 
-            services.AddDbContext<DatabaseContext>(opt =>
-                                               opt.UseInMemoryDatabase("CE_RIDE_SHARE"));
+            /*services.AddDbContext<DatabaseContext>(opt =>
+                                               opt.UseInMemoryDatabase("CE_RIDE_SHARE"));*/
+        services.AddDbContext<DatabaseContext>(opt =>
+                                               opt.UseNpgsql(Configuration.GetConnectionString("DefaultConnection")));
             services.AddControllers();
            
         }
